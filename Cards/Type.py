@@ -1,11 +1,11 @@
-from enum import Enum
+from enum import Enum, auto
 
 class CardType(Enum):
     Item = 0
     Character = 1
 
 class OptionType(Enum):
-    Damage = 0
-    Draw = 1
-    Money = 2
-    Heal = 3
+    Damage = auto()
+    Draw = auto()
+    Money = auto()
+    Heal = auto()

@@ -1,23 +1,19 @@
-from Type import CardType, OptionType
+from Type import CardType
+from dataclasses import dataclass
 
+@dataclass
 class Deck:
-    def __init__(self, cards: list[Card], type: CardType):
-        self.cards = cards
-        self.type = type
+    cards: list["Card"]
+    type: CardType
 
 class Card:
-    def __init__(self, name: str, type: CardType, option: OptionType, amount: int):
+    def __init__(self, name: str, type: CardType, content):
         self.name = name
         self.type = type
-        self.amount = amount
-        self.option = option
+        self.content = content
+
+    def __str__(self):
+        return f"{self.name} ({self.card_type.name})"
 
     def play(self, player, opponent):
-        if self.option == OptionType.Damage:
-            opponent.take_damage(self.amount)
-        elif self.option == OptionType.Draw:
-            player.draw_card(self.amount)
-        elif self.option == OptionType.Money:
-            player.gain_gold(self.amount)
-        elif self.option == OptionType.Heal:
-            player.heal(self.amount)
+        self.content.apply(player, opponent)

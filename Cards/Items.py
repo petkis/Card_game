@@ -1,6 +1,18 @@
+from Type import OptionType
+
 class Item:
-    def __init__(self, name, description, cost, abilities):
-        self.name = name
+    def __init__(self, description, cost, option, amount):
         self.description = description
         self.cost = cost
-        self.abilities = abilities
+        self.option = option
+        self.amount = amount
+
+    def apply(self, player, opponent):
+        if self.option == OptionType.Damage:
+            opponent.take_damage(self.amount)
+        elif self.option == OptionType.Draw:
+            player.draw_card(self.amount)
+        elif self.option == OptionType.Money:
+            player.gain_gold(self.amount)
+        elif self.option == OptionType.Heal:
+            player.heal(self.amount)

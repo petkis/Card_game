@@ -26,3 +26,5 @@ class Player:
                 self.characters_discard_pile.cards = []
             card = self.characters_deck.cards.pop()
             self.hand.append(card)
+
+    
