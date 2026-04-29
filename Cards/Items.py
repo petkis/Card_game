@@ -11,7 +11,7 @@ class Item:
         if self.option == OptionType.Damage:
             opponent.take_damage(self.amount)
         elif self.option == OptionType.Draw:
-            player.draw_card(self.amount)
+            player.draw_items(self.amount)
         elif self.option == OptionType.Money:
             player.gain_gold(self.amount)
         elif self.option == OptionType.Heal:
