@@ -1,5 +1,5 @@
-from Player import Player
-from Turn import TurnManager
+from Player.Player import Player
+from Game.Turn import TurnManager
 
 class Game:
     def __init__(self, player_one, player_two):
@@ -9,11 +9,11 @@ class Game:
 
     def play_Game(self) -> int:
         while True:
-            self.TurnManager.play_turn(self.player_one)
+            self.TurnManager.play_turn(self.player_one, self.player_two)
             if self.player_two.hp <= 0:
                 print("Player two lost.")
                 return 1
-            self.TurnManager.play_turn(self.player_two)
+            self.TurnManager.play_turn(self.player_two, self.player_one)
             if self.player_one.hp <= 0:
                 print("Player one lost.")
                 return 2

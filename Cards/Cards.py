@@ -1,8 +1,8 @@
-from Type import CardType
+from Cards.Type import CardType
 from dataclasses import dataclass
 from typing import Union
-from Items import Item
-from Characters import Character
+from Cards.Items import Item
+from Cards.Characters import Character
 
 @dataclass
 class Deck:
@@ -11,9 +11,8 @@ class Deck:
 
     def shuffle(self):
         import random
-        deck = random.shuffle(self.cards)
-        self.cards = []
-        return deck
+        random.shuffle(self.cards)
+        return self
     
     def __len__(self):
         return len(self.cards)

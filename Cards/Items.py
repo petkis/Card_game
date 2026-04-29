@@ -1,4 +1,4 @@
-from Type import OptionType
+from Cards.Type import OptionType
 
 class Item:
     def __init__(self, description, cost, option, amount):
