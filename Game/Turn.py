@@ -1,10 +1,11 @@
-from Player import Player
+from Player.Player import Player
+from Cards.Type import CardType
 
 class TurnManager:
     def __init__(self):
         pass
 
-    def playTurn(self, player: Player, opponent: Player):
+    def play_turn(self, player: Player, opponent: Player):
         player.draw_items(5)
         player.draw_characters(1)
 
@@ -20,3 +21,7 @@ class TurnManager:
             else:
                 card = player.hand.pop(index)
                 card.play(player, opponent)
+                if card.type == CardType.Item:
+                    player.item_discard_pile.cards.append(card)
+                else:
+                    player.characters_discard_pile.cards.append(card)

@@ -4,12 +4,16 @@ from Cards.Type import CardType
 class Player:
     def __init__(self, name: str, starter_item_deck: Deck, starter_character_deck: Deck):
         self.name = name
+
         self.item_deck = starter_item_deck
-        self.item_discard_pile: Deck = Deck(CardType.Item)
         self.characters_deck = starter_character_deck
-        self.characters_discard_pile: Deck = Deck(CardType.Character)
+
+        self.item_discard_pile = Deck([], CardType.Item)
+        self.characters_discard_pile = Deck([], CardType.Character)
+
         self.hand = []
         self.hp = 30
+        self.gold = 0
 
     def draw_items(self, amount: int):
         for _ in range(amount):
@@ -27,4 +31,11 @@ class Player:
             card = self.characters_deck.cards.pop()
             self.hand.append(card)
 
-    
+    def take_damage(self, amount: int):
+        self.hp -= amount
+
+    def heal(self, amount: int):
+        self.hp += amount
+
+    def gain_gold(self, amount: int):
+        self.gold += amount
