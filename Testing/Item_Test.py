@@ -6,43 +6,60 @@ class DummyPlayer:
     def __init__(self):
         self.hp = 10
         self.gold = 0
-        self.drawn = 0
+        self.drawn_items = 0
 
-    def take_damage(self, x):
-        self.hp -= x
+    def take_damage(self, amount):
+        self.hp -= amount
 
-    def heal(self, x):
-        self.hp += x
+    def heal(self, amount):
+        self.hp += amount
 
-    def gain_gold(self, x):
-        self.gold += x
+    def gain_gold(self, amount):
+        self.gold += amount
 
-    def draw_card(self, x):
-        self.drawn += x
+    def draw_items(self, amount):
+        self.drawn_items += amount
 
 
 def test_item_damage():
-    item = Item("dmg", 0, OptionType.Damage, 3)
-    p1, p2 = DummyPlayer(), DummyPlayer()
+    item = Item("Deal 3 damage", 0, OptionType.Damage, 3)
+    player = DummyPlayer()
+    opponent = DummyPlayer()
 
-    item.apply(p1, p2)
+    item.apply(player, opponent)
 
-    assert p2.hp == 7
+    assert opponent.hp == 7
+    assert player.hp == 10
 
 
 def test_item_heal():
-    item = Item("heal", 0, OptionType.Heal, 5)
-    p1, p2 = DummyPlayer(), DummyPlayer()
+    item = Item("Heal 5", 0, OptionType.Heal, 5)
+    player = DummyPlayer()
+    opponent = DummyPlayer()
 
-    item.apply(p1, p2)
+    item.apply(player, opponent)
 
-    assert p1.hp == 15
+    assert player.hp == 15
+    assert opponent.hp == 10
 
 
 def test_item_gold():
-    item = Item("gold", 0, OptionType.Money, 10)
-    p1, p2 = DummyPlayer(), DummyPlayer()
+    item = Item("Gain 10 gold", 0, OptionType.Money, 10)
+    player = DummyPlayer()
+    opponent = DummyPlayer()
 
-    item.apply(p1, p2)
+    item.apply(player, opponent)
 
-    assert p1.gold == 10
+    assert player.gold == 10
+    assert opponent.gold == 0
+
+
+def test_item_draw():
+    item = Item("Draw 2 items", 0, OptionType.Draw, 2)
+    player = DummyPlayer()
+    opponent = DummyPlayer()
+
+    item.apply(player, opponent)
+
+    assert player.drawn_items == 2
+    assert opponent.drawn_items == 0
