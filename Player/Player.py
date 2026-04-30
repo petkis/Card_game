@@ -1,17 +1,18 @@
-from Cards.Cards import Deck
+from Cards.Cards import Deck, Card
 from Cards.Type import CardType
+from Cards.Starter import starter_item_deck, starter_character_deck
 
 class Player:
-    def __init__(self, name: str, starter_item_deck: Deck, starter_character_deck: Deck):
+    def __init__(self, name: str):
         self.name = name
 
-        self.item_deck = starter_item_deck
-        self.characters_deck = starter_character_deck
+        self.item_deck = starter_item_deck()
+        self.characters_deck = starter_character_deck()
 
         self.item_discard_pile = Deck([], CardType.Item)
         self.characters_discard_pile = Deck([], CardType.Character)
 
-        self.hand = []
+        self.hand: list[Card] = []
         self.hp = 30
         self.gold = 0
 

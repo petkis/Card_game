@@ -1,5 +1,6 @@
 from Player.Player import Player
 from Cards.Type import CardType
+from Cards.Cards import Card
 
 class TurnManager:
     def __init__(self):
@@ -19,7 +20,7 @@ class TurnManager:
                 print("Invalid input, try number between 0 and", len(player.hand) - 1)
                 continue
             else:
-                card = player.hand.pop(index)
+                card: Card = player.hand.pop(index)
                 card.play(player, opponent)
                 if card.type == CardType.Item:
                     player.item_discard_pile.cards.append(card)

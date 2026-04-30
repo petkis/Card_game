@@ -1,29 +1,49 @@
-from Cards.Cards import Deck, Card
-from Cards.Type import CardType
+from Game.Game import Game
 
 
-class DummyContent:
-    def __init__(self):
-        self.called = False
-
-    def apply(self, player, opponent):
-        self.called = True
+class DummyTurnManager:
+    def play_turn(self, player, opponent):
+        opponent.hp = 0
 
 
-def test_deck_length():
-    deck = Deck([], CardType.Item)
-    assert len(deck) == 0
+class DummyPlayer:
+    def __init__(self, hp=10):
+        self.hp = hp
 
 
-def test_card_str():
-    card = Card("Fireball", CardType.Item, DummyContent())
-    assert str(card) == "Fireball (Item)"
+def test_game_player_one_wins():
+    p1 = DummyPlayer()
+    p2 = DummyPlayer()
+
+    game = Game(p1, p2)
+    game.TurnManager = DummyTurnManager()
+
+    result = game.play_Game()
+
+    assert result == 1
 
 
-def test_card_play_calls_apply():
-    content = DummyContent()
-    card = Card("Test", CardType.Item, content)
+def test_game_player_two_wins():
+    class PlayerTwoWinsTurnManager:
+        def __init__(self):
+            self.calls = 0
 
-    card.play(None, None)
+        def play_turn(self, player, opponent):
+            self.calls += 1
 
-    assert content.called is True
+            if self.calls == 1:
+                # Player 1 attacks but does not win
+                pass
+            else:
+                # Player 2 attacks and wins
+                opponent.hp = 0
+
+    p1 = DummyPlayer()
+    p2 = DummyPlayer()
+
+    game = Game(p1, p2)
+    game.TurnManager = PlayerTwoWinsTurnManager()
+
+    result = game.play_Game()
+
+    assert result == 2

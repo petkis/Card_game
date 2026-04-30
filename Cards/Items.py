@@ -16,3 +16,6 @@ class Item:
             player.gain_gold(self.amount)
         elif self.option == OptionType.Heal:
             player.heal(self.amount)
+
+    def __str__(self):
+        return(self.description)
