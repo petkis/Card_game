@@ -11,7 +11,7 @@ class TurnManager:
         player.draw_characters(1)
 
         while len(player.hand) > 0:
-            print("Player's hand:")
+            print(player,"turn")
             for i, item in enumerate(player.hand):
                 print(f"{i}: {item}")
             print("Select a card to play:")
