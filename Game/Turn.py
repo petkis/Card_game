@@ -12,13 +12,18 @@ class TurnManager:
 
         while len(player.hand) > 0:
             print(player,"turn")
-            for i, item in enumerate(player.hand):
-                print(f"{i}: {item}")
+            i = 0
+            for card in player.hand:
+                print(f"{i}: {card}")
+                i += 1
+            print(f"{i}: shop")
             print("Select a card to play:")
             index = int(input())
-            if index < 0 or index >= len(player.hand):
-                print("Invalid input, try number between 0 and", len(player.hand) - 1)
+            if index < 0 or index > len(player.hand):
+                print("Invalid input, try number between 0 and", len(player.hand))
                 continue
+            elif index == len(player.hand):
+                print("Shop:")
             else:
                 card: Card = player.hand.pop(index)
                 card.play(player, opponent)
