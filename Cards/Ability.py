@@ -6,6 +6,6 @@ class Ability:
     def __str__(self):
         return self.ability
 
-    #def use_ability(self):
-    #    if self.condition:
-    #        return self.ability
+    def use_ability(self):
+        if self.condition:
+            return self.ability

@@ -26,16 +26,20 @@ class DummyPlayer:
     def draw_characters(self, amount):
         pass
 
+class DummyShop:
+    def __init__(self):
+        pass
 
-@patch("builtins.input", side_effect=["0"])
+@patch("builtins.input", side_effect=["0", "5"])
 def test_play_turn_plays_item_card(mock_input):
     tm = TurnManager()
     p1 = DummyPlayer(CardType.Item)
     p2 = DummyPlayer()
+    shop = DummyShop()
 
     card = p1.hand[0]
 
-    tm.play_turn(p1, p2)
+    tm.play_turn(p1, p2, shop)
 
     assert card.played is True
     assert len(p1.hand) == 0
@@ -43,15 +47,16 @@ def test_play_turn_plays_item_card(mock_input):
     assert p1.item_discard_pile.cards[0] is card
 
 
-@patch("builtins.input", side_effect=["0"])
+@patch("builtins.input", side_effect=["0", "5"])
 def test_play_turn_plays_character_card(mock_input):
     tm = TurnManager()
     p1 = DummyPlayer(CardType.Character)
     p2 = DummyPlayer()
+    shop = DummyShop()
 
     card = p1.hand[0]
 
-    tm.play_turn(p1, p2)
+    tm.play_turn(p1, p2, shop)
 
     assert card.played is True
     assert len(p1.hand) == 0

@@ -19,17 +19,17 @@ class Shop:
             self.shown_characters.append(self.character_shop_deck.pop())
 
         self.discarded_items: list[Card] = []
-        self.discarded_characer: list[Card] = []
+        self.discarded_characters: list[Card] = []
 
     def __str__(self):
         shop_str = "Available items:\n"
         i = 0
         for item in self.shown_items:
-            shop_str += str(i) + " " + str(item.name) + str(item.content) + " costs: " + str(item.content.cost) + " gold\n"
+            shop_str += str(i) + " " + str(item.name) + " " + str(item.content) + " costs: " + str(item.content.cost) + " gold\n"
             i += 1
         shop_str += "\nAvailable characters:\n"
-        for character in self.shown_items:
-            shop_str += str(i) + " " + str(character.name) + str(character.content) + " costs: " + str(character.content.cost) + " gold\n"
+        for character in self.shown_characters:
+            shop_str += str(i) + " " + str(character.name) + " " + str(character.content) + " costs: " + str(character.content.cost) + " gold\n"
             i += 1
         return shop_str
     
@@ -38,21 +38,32 @@ class Shop:
 
         if index >= len(shop):
             raise IndexError('index out of shop range')
-        if player.gold < shop[index].content.cost:
+        
+        if index < len(self.shown_items):
+            shop = self.shown_items
+            deck = self.item_shop_deck
+            discards = self.discarded_items
+            local_index = index
+        else:
+            shop = self.shown_characters
+            deck = self.character_shop_deck
+            discards = self.discarded_characters
+            local_index = index - len(self.shown_items)
+
+        bought_card = shop[local_index]
+
+        if player.gold < bought_card.content.cost:
             print("Not enough gold")
             return None
         
-        bought_card = shop.pop(index)
-        discards = self.discarded_characer
-        deck = self.character_shop_deck
-        shop = self.shown_characters
-
-        if bought_card.type == CardType.Item:
-            discards = self.discarded_items
-            deck = self.item_shop_deck
-            shop = self.shown_items
+        bought_card = shop.pop(local_index)
 
         if len(deck) == 0:
-            deck = random.shuffle(discards)
-        shop.append(deck.pop())
+            random.shuffle(discards)
+            deck.extend(discards)
+            discards.clear()
+        
+        if len(deck) > 0:
+            shop.append(deck.pop())
+        
         return bought_card

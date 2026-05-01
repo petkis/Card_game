@@ -5,7 +5,7 @@ class DummyTM:
     def __init__(self):
         self.calls = 0
 
-    def play_turn(self, player, opponent):
+    def play_turn(self, player, opponent, shop):
         opponent.hp = 0  # force win
 
 
