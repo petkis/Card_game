@@ -13,7 +13,7 @@ class Player:
         self.characters_discard_pile = Deck([], CardType.Character)
 
         self.hand: list[Card] = []
-        self.hp = 10
+        self.hp = 30
         self.gold = 0
 
     def draw_items(self, amount: int):
@@ -31,6 +31,13 @@ class Player:
                 self.characters_discard_pile.cards = []
             card = self.characters_deck.cards.pop()
             self.hand.append(card)
+
+    def bought(self, card: Card, type: CardType):
+        self.gold -= card.content.cost
+        discard = self.item_discard_pile
+        if type == CardType.Character:
+            discard = self.characters_discard_pile
+        discard.cards.append(card)
 
     def take_damage(self, amount: int):
         self.hp -= amount

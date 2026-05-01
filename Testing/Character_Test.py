@@ -7,7 +7,7 @@ def test_character_applies_one_ability():
     def ability(player, opponent):
         calls.append("ability")
 
-    character = Character("Test character", [ability])
+    character = Character("Test character", [ability], cost=0)
 
     character.apply(None, None)
 
@@ -23,7 +23,7 @@ def test_character_applies_all_abilities_in_order():
     def ability2(player, opponent):
         calls.append("a2")
 
-    character = Character("Test character", [ability1, ability2])
+    character = Character("Test character", [ability1, ability2], cost=0)
 
     character.apply(None, None)
 
@@ -45,7 +45,8 @@ def test_character_ability_can_affect_player():
         "Gain gold",
         [
             lambda p, o: p.gain_gold(3)
-        ]
+        ],
+        cost = 0
     )
 
     character.apply(player, opponent)
@@ -69,7 +70,8 @@ def test_character_ability_can_affect_opponent():
         "Deal damage",
         [
             lambda p, o: o.take_damage(4)
-        ]
+        ],
+        cost = 0
     )
 
     character.apply(player, opponent)
