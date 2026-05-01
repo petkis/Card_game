@@ -1,37 +1,58 @@
 from Cards.Starter import start_shop
 from Cards.Type import CardType
+from Cards.Cards import Card
+from Player.Player import Player
+
 import random
 
 class Shop:
     def __init__(self):
         self.item_shop_deck, self.character_shop_deck = start_shop()
+        random.shuffle(self.item_shop_deck)
+        random.shuffle(self.character_shop_deck)
 
-        self.shown_items = []
-        self.shown_characters = []
+        self.shown_items: list[Card] = []
+        self.shown_characters: list[Card] = []
 
-        self.discarded_items = []
-        self.discarded_characer = []
+        for _ in range(3):
+            self.shown_items.append(self.item_shop_deck.pop())
+            self.shown_characters.append(self.character_shop_deck.pop())
+
+        self.discarded_items: list[Card] = []
+        self.discarded_characer: list[Card] = []
 
     def __str__(self):
         shop_str = "Available items:\n"
+        i = 0
         for item in self.shown_items:
-            shop_str += str(item) + " " + str(item.content.cost) + " "
+            shop_str += str(i) + " " + str(item.name) + str(item.content) + " costs: " + str(item.content.cost) + " gold\n"
+            i += 1
         shop_str += "\nAvailable characters:\n"
         for character in self.shown_items:
-            shop_str += str(character) + " " + str(character.content.cost) + " "
+            shop_str += str(i) + " " + str(character.name) + str(character.content) + " costs: " + str(character.content.cost) + " gold\n"
+            i += 1
         return shop_str
     
-    def buy(self, index, type: CardType):
-        deck = self.item_shop_deck
-        shop = self.shown_items
-        discards = self.discarded_items
-        if type == CardType.Character:
-            deck = self.character_shop_deck
-            shop = self.shown_characters
-            discards = self.discarded_characer
+    def buy(self, index, player: Player):
+        shop = self.shown_items + self.shown_characters
+
         if index >= len(shop):
             raise IndexError('index out of shop range')
+        if player.gold < shop[index].content.cost:
+            print("Not enough gold")
+            return None
+        
+        bought_card = shop.pop(index)
+        discards = self.discarded_characer
+        deck = self.character_shop_deck
+        shop = self.shown_characters
+
+        if bought_card.type == CardType.Item:
+            discards = self.discarded_items
+            deck = self.item_shop_deck
+            shop = self.shown_items
+
         if len(deck) == 0:
             deck = random.shuffle(discards)
         shop.append(deck.pop())
-        return shop.pop(index)
+        return bought_card

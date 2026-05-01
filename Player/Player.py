@@ -32,6 +32,13 @@ class Player:
             card = self.characters_deck.cards.pop()
             self.hand.append(card)
 
+    def bought(self, card: Card, type: CardType):
+        self.gold -= card.content.cost
+        discard = self.item_discard_pile
+        if type == CardType.Character:
+            discard = self.characters_discard_pile
+        discard.cards.append(card)
+
     def take_damage(self, amount: int):
         self.hp -= amount
 
