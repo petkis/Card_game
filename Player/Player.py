@@ -13,7 +13,7 @@ class Player:
         self.characters_discard_pile = Deck([], CardType.Character)
 
         self.hand: list[Card] = []
-        self.hp = 10
+        self.hp = 30
         self.gold = 0
 
     def draw_items(self, amount: int):

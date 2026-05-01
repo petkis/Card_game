@@ -90,3 +90,6 @@ def starter_character_deck():
     ]
 
     return Deck(cards, CardType.Character)
+
+def start_shop() -> tuple[list[Card], list[Card]]:
+    return ([], [])
