@@ -16,6 +16,10 @@ class Player:
         self.hp = 30
         self.gold = 0
 
+    def shuffle_decks(self):
+        self.characters_deck = self.characters_deck.shuffle()
+        self.item_deck = self.item_deck.shuffle()
+
     def draw_items(self, amount: int):
         for _ in range(amount):
             if len(self.item_deck) == 0:

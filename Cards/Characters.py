@@ -6,7 +6,7 @@ class Character:
 
     def apply(self, player, opponent):
         for ability in self.abilities:
-            ability(player, opponent)
+            ability.use_ability(player, opponent)
 
     def __str__(self):
         return(self.description)

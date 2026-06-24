@@ -10,6 +10,8 @@ class Game:
         self.shop = Shop()
 
     def play_Game(self) -> int:
+        self.player_one.shuffle_decks()
+        self.player_two.shuffle_decks()
         while True:
             self.TurnManager.play_turn(self.player_one, self.player_two, self.shop)
             if self.player_two.hp <= 0:

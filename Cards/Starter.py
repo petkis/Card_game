@@ -2,6 +2,7 @@ from Cards.Cards import Deck, Card
 from Cards.Type import CardType, OptionType
 from Cards.Items import Item
 from Cards.Characters import Character
+from Cards.Ability import Ability
 
 def starter_item_deck():
     cards = [
@@ -62,7 +63,7 @@ def starter_character_deck():
                 cost=0,
                 description="Merchant: Gain 2 gold",
                 abilities=[
-                    lambda player, opponent: player.gain_gold(2)
+                    Ability(condition = True, ability = lambda player, opponent: player.gain_gold(2))
                 ]
             )
         ),
@@ -74,7 +75,7 @@ def starter_character_deck():
                 cost=0,
                 description="Banker: Gain 3 gold",
                 abilities=[
-                    lambda player, opponent: player.gain_gold(3)
+                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(3))
                 ]
             )
         ),
@@ -86,7 +87,7 @@ def starter_character_deck():
                 cost=0,
                 description="Soldier: Deal 3 damage",
                 abilities=[
-                    lambda player, opponent: opponent.take_damage(3)
+                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(3))
                 ]
             )
         ),
@@ -131,7 +132,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=4,
                 description="Noble: Gain 4 gold",
                 abilities=[
-                    lambda player, opponent: player.gain_gold(4)
+                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(4))
                 ]
             )
         ),
@@ -142,7 +143,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=4,
                 description="Knight: Deal 4 damage",
                 abilities=[
-                    lambda player, opponent: opponent.take_damage(4)
+                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(4))
                 ]
             )
         ),
@@ -153,7 +154,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=4,
                 description="Healer: Heal 5 hp",
                 abilities=[
-                    lambda player, opponent: player.heal(5)
+                    Ability(condition = True, ability =lambda player, opponent: player.heal(5))
                 ]
             )
         ),
@@ -164,7 +165,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=5,
                 description="Assassin: Deal 6 damage",
                 abilities=[
-                    lambda player, opponent: opponent.take_damage(6)
+                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(6))
                 ]
             )
         ),
@@ -175,7 +176,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=1,
                 description="Tax Collector: Gain 2 gold",
                 abilities=[
-                    lambda player, opponent: player.gain_gold(2)
+                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(2))
                 ]
             )
         ),
