@@ -1,5 +1,5 @@
 class Character:
-    def __init__(self, description, abilities, cost):
+    def __init__(self, description: str, abilities, cost: int):
         self.description = description
         self.abilities = abilities
         self.cost = cost

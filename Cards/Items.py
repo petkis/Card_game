@@ -1,7 +1,7 @@
 from Cards.Type import OptionType
 
 class Item:
-    def __init__(self, description, cost, option, amount):
+    def __init__(self, description: str, cost: int, option: OptionType, amount: int):
         self.description = description
         self.cost = cost
         self.option = option
