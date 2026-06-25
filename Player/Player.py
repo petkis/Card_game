@@ -44,12 +44,15 @@ class Player:
         discard.cards.append(card)
 
     def take_damage(self, amount: int):
+        print(f"{self.name} is taking {amount} of demage!")
         self.hp -= amount
 
     def heal(self, amount: int):
+        print(f"{self.name} is healing {amount} of health!")
         self.hp += amount
 
     def gain_gold(self, amount: int):
+        print(f"{self.name} is gaining {amount} of gold!")
         self.gold += amount
 
     def __str__(self):

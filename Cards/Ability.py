@@ -7,5 +7,5 @@ class Ability:
         return self.ability
 
     def use_ability(self, player, opponent):
-        if self.condition:
-            return self.ability(player, opponent)
+        if self.condition(player, opponent):
+            self.ability(player, opponent)

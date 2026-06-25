@@ -3,6 +3,8 @@ from Cards.Type import CardType, OptionType
 from Cards.Items import Item
 from Cards.Characters import Character
 from Cards.Ability import Ability
+import Cards.Ability_Help.conditions as cond
+import Cards.Ability_Help.effects as eff
 
 def starter_item_deck():
     cards = [
@@ -63,7 +65,8 @@ def starter_character_deck():
                 cost=0,
                 description="Merchant: Gain 2 gold",
                 abilities=[
-                    Ability(condition = True, ability = lambda player, opponent: player.gain_gold(2))
+                    Ability(condition = cond.always, 
+                            ability = eff.gain_gold(2))
                 ]
             )
         ),
@@ -75,7 +78,8 @@ def starter_character_deck():
                 cost=0,
                 description="Banker: Gain 3 gold",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(3))
+                    Ability(condition = cond.always, 
+                            ability = eff.gain_gold(3))
                 ]
             )
         ),
@@ -87,7 +91,8 @@ def starter_character_deck():
                 cost=0,
                 description="Soldier: Deal 3 damage",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(3))
+                    Ability(condition = cond.always, 
+                            ability = eff.deal_damage(3))
                 ]
             )
         ),
@@ -130,9 +135,12 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=4,
-                description="Noble: Gain 4 gold",
+                description="Noble: If your health is above 15 gain 4 gold.\n Otherwise gain 2 gold.",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(4))
+                    Ability(condition = cond.health_over_X(15), 
+                            ability = eff.gain_gold(4)),
+                    Ability(condition = cond.health_under_X(16), 
+                            ability = eff.gain_gold(2)),
                 ]
             )
         ),
@@ -143,7 +151,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=4,
                 description="Knight: Deal 4 damage",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(4))
+                    Ability(condition = cond.always,
+                            ability = eff.deal_damage(4))
                 ]
             )
         ),
@@ -154,7 +163,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=4,
                 description="Healer: Heal 5 hp",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: player.heal(5))
+                    Ability(condition = cond.always,
+                            ability = eff.heal(5))
                 ]
             )
         ),
@@ -163,9 +173,12 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=5,
-                description="Assassin: Deal 6 damage",
+                description="Assassin: If you have more health tahn your opponent deal 6 damage.\n Otherwise deal 3 damage.",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: opponent.take_damage(6))
+                    Ability(condition = cond.opponent_less_healt(), 
+                            ability = eff.deal_damage(6)),
+                    Ability(condition = cond.opponent_NOT_less_healt(), 
+                            ability = eff.deal_damage(3)),
                 ]
             )
         ),
@@ -176,7 +189,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 cost=1,
                 description="Tax Collector: Gain 2 gold",
                 abilities=[
-                    Ability(condition = True, ability =lambda player, opponent: player.gain_gold(2))
+                    Ability(condition = cond.always,
+                            ability = eff.gain_gold(2))
                 ]
             )
         ),
