@@ -1,11 +1,12 @@
-from Cards.Type import OptionType
+from Cards.Type import OptionType, Guild
 
 class Item:
-    def __init__(self, description: str, cost: int, option: OptionType, amount: int):
+    def __init__(self, description: str, cost: int, option: OptionType, amount: int, guild = None):
         self.description = description
         self.cost = cost
         self.option = option
         self.amount = amount
+        self.guild: Guild | None = guild
 
     def apply(self, player, opponent):
         if self.option == OptionType.Damage:

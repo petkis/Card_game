@@ -1,5 +1,3 @@
-import pytest
-
 from Cards.Ability import Ability
 from Cards.Characters import Character
 

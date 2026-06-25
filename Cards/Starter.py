@@ -1,5 +1,5 @@
 from Cards.Cards import Deck, Card
-from Cards.Type import CardType, OptionType
+from Cards.Type import CardType, OptionType, Guild
 from Cards.Items import Item
 from Cards.Characters import Character
 from Cards.Ability import Ability
