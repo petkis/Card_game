@@ -1,11 +1,10 @@
 from Cards.Type import CardType
 from dataclasses import dataclass
-from typing import Union
 from Cards.Items import Item
 from Cards.Characters import Character
 
 class Card:
-    def __init__(self, name: str, type: CardType, content: Union[Item, Character]):
+    def __init__(self, name: str, type: CardType, content: Item | Character):
         self.name = name
         self.type = type
         self.content = content

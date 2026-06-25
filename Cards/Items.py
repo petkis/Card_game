@@ -19,4 +19,7 @@ class Item:
             player.heal(self.amount)
 
     def __str__(self):
+        addon = ""
+        if self.guild:
+            addon += " Guild: " + self.guild.name
         return(self.description)

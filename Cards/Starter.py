@@ -63,7 +63,7 @@ def starter_character_deck():
             CardType.Character,
             Character(
                 cost=0,
-                description="Merchant: Gain 2 gold",
+                description="Gain 2 gold",
                 abilities=[
                     Ability(condition = cond.always, 
                             ability = eff.gain_gold(2))
@@ -76,7 +76,7 @@ def starter_character_deck():
             CardType.Character,
             Character(
                 cost=0,
-                description="Banker: Gain 3 gold",
+                description="Gain 3 gold",
                 abilities=[
                     Ability(condition = cond.always, 
                             ability = eff.gain_gold(3))
@@ -89,7 +89,7 @@ def starter_character_deck():
             CardType.Character,
             Character(
                 cost=0,
-                description="Soldier: Deal 3 damage",
+                description="Deal 3 damage",
                 abilities=[
                     Ability(condition = cond.always, 
                             ability = eff.deal_damage(3))
@@ -140,7 +140,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=4,
-                description="Noble: If your health is above 15 gain 4 gold.\n Otherwise gain 2 gold.",
+                description="If your health is above 15 gain 4 gold.\n Otherwise gain 2 gold.",
                 abilities=[
                     Ability(condition = cond.health_over_X(15), 
                             ability = eff.gain_gold(4)),
@@ -155,7 +155,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=4,
-                description="Knight: Deal 4 damage",
+                description="Deal 4 damage",
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.deal_damage(4))
@@ -168,7 +168,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=4,
-                description="Priest: Heal 5 hp",
+                description="Heal 5 hp",
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.heal(5))
@@ -181,7 +181,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=6,
-                description="Bishop: Heal 5 hp and if you've played a church item deal 5 damage.",
+                description="Heal 5 hp and if you've played a church item deal 5 damage.",
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.heal(5)),
@@ -196,7 +196,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=5,
-                description="Assassin: If you have more health tahn your opponent deal 6 damage.\n Otherwise deal 3 damage.",
+                description="If you have more health tahn your opponent deal 6 damage.\n Otherwise deal 3 damage.",
                 abilities=[
                     Ability(condition = cond.opponent_less_healt(), 
                             ability = eff.deal_damage(6)),
@@ -211,7 +211,7 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=1,
-                description="Tax Collector: Gain 2 gold",
+                description="Gain 2 gold",
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.gain_gold(2))

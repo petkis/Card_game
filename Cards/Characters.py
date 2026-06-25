@@ -12,4 +12,7 @@ class Character:
             ability.use_ability(player, opponent)
 
     def __str__(self):
-        return(self.description)
+        addon = ""
+        if self.guild:
+            addon += " Guild: " + self.guild.name
+        return(self.description + addon)
