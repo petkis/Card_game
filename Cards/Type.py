@@ -13,6 +13,8 @@ class OptionType(Enum):
 class Guild(Enum):
     TradeGuild = auto()
     ThievesGuild = auto()
+    Nobility = auto()
     Soldiers = auto()
     Peasants = auto()
     Church = auto()
+    Adventurers = auto()

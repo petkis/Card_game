@@ -38,6 +38,7 @@ class TurnManager:
                 print(f"{i}: {card}")
                 i += 1
             print(f"{i}: shop")
+            print(f"{i+1}: END TURN")
             print("Select a card to play:")
             index = input()
             try:
@@ -45,11 +46,14 @@ class TurnManager:
             except:
                 print("Invalid Input!")
                 continue
-            if index < 0 or index > len(player.hand):
-                print("Invalid input, try number between 0 and", len(player.hand))
+            if index < 0 or index >= len(player.hand):
+                print("Invalid input, try number between 0 and", (len(player.hand) + 1))
                 continue
             elif index == len(player.hand):
                 self.shopping(player, shop)
+            elif index == (len(player.hand) + 1):
+                print("ENDING TURN")
+                return
             else:
                 card: Card = player.hand.pop(index)
                 card.play(player, opponent)

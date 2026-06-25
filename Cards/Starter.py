@@ -110,22 +110,22 @@ def start_shop() -> tuple[list[Card], list[Card]]:
         Card(
             "Treasure Chest",
             CardType.Item,
-            Item("Gain 3 gold", cost=3, option=OptionType.Money, amount=3)
+            Item("Gain 3 gold", cost=3, option=OptionType.Money, amount=3, guild=Guild.Adventurers)
         ),
         Card(
             "Dagger",
             CardType.Item,
-            Item("Deal 2 damage", cost=2, option=OptionType.Damage, amount=2)
+            Item("Deal 2 damage", cost=2, option=OptionType.Damage, amount=2, guild=Guild.ThievesGuild)
         ),
         Card(
-            "Sword",
+            "Guard's sword",
             CardType.Item,
-            Item("Deal 3 damage", cost=4, option=OptionType.Damage, amount=3)
+            Item("Deal 3 damage", cost=4, option=OptionType.Damage, amount=3, guild=Guild.Soldiers)
         ),
         Card(
             "Greatsword",
             CardType.Item,
-            Item("Deal 5 damage", cost=6, option=OptionType.Damage, amount=5)
+            Item("Deal 5 damage", cost=6, option=OptionType.Damage, amount=5, guild=Guild.Soldiers)
         ),
     ]
 
@@ -141,7 +141,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                             ability = eff.gain_gold(4)),
                     Ability(condition = cond.health_under_X(16), 
                             ability = eff.gain_gold(2)),
-                ]
+                ],
+                guild=Guild.Nobility
             )
         ),
         Card(
@@ -153,11 +154,12 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.deal_damage(4))
-                ]
+                ],
+                guild=Guild.Soldiers
             )
         ),
         Card(
-            "Healer",
+            "Priest",
             CardType.Character,
             Character(
                 cost=4,
@@ -165,7 +167,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.heal(5))
-                ]
+                ],
+                guild=Guild.Church
             )
         ),
         Card(
@@ -179,7 +182,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                             ability = eff.deal_damage(6)),
                     Ability(condition = cond.opponent_NOT_less_healt(), 
                             ability = eff.deal_damage(3)),
-                ]
+                ],
+                guild=Guild.ThievesGuild
             )
         ),
         Card(
@@ -191,7 +195,8 @@ def start_shop() -> tuple[list[Card], list[Card]]:
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.gain_gold(2))
-                ]
+                ],
+                guild=Guild.TradeGuild
             )
         ),
     ]
