@@ -9,6 +9,8 @@ class Player:
         self.item_deck = starter_item_deck()
         self.characters_deck = starter_character_deck()
 
+        self.played: list[Card] = []
+
         self.item_discard_pile = Deck([], CardType.Item)
         self.characters_discard_pile = Deck([], CardType.Character)
 
@@ -54,6 +56,19 @@ class Player:
     def gain_gold(self, amount: int):
         print(f"{self.name} is gaining {amount} of gold!")
         self.gold += amount
+
+    def empty_hand(self):
+        while self.hand:
+            card = self.hand.pop()
+            discard = self.item_discard_pile
+            if card.type == CardType.Character:
+                discard = self.characters_discard_pile
+            discard.cards.append(card)
+
+    def end_turn(self):
+        self.empty_hand()
+        self.gold = 0
+        self.played = []
 
     def __str__(self):
         return self.name + " hp: " + str(self.hp) + " gold: " + str(self.gold)

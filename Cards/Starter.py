@@ -127,6 +127,11 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Item,
             Item("Deal 5 damage", cost=6, option=OptionType.Damage, amount=5, guild=Guild.Soldiers)
         ),
+        Card(
+            "Holy Water",
+            CardType.Item,
+            Item("Heal 3 hp", cost=3, option=OptionType.Heal, amount=4, guild=Guild.Church)
+            )
     ]
 
     character_shop_cards = [
@@ -163,10 +168,25 @@ def start_shop() -> tuple[list[Card], list[Card]]:
             CardType.Character,
             Character(
                 cost=4,
-                description="Healer: Heal 5 hp",
+                description="Priest: Heal 5 hp",
                 abilities=[
                     Ability(condition = cond.always,
                             ability = eff.heal(5))
+                ],
+                guild=Guild.Church
+            )
+        ),
+        Card(
+            "Bishop",
+            CardType.Character,
+            Character(
+                cost=6,
+                description="Bishop: Heal 5 hp and if you've played a church item deal 5 damage.",
+                abilities=[
+                    Ability(condition = cond.always,
+                            ability = eff.heal(5)),
+                    Ability(condition = cond.played_item_of_same_guild(Guild.Church),
+                            ability = eff.deal_damage(5))
                 ],
                 guild=Guild.Church
             )

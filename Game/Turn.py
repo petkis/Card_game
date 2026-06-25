@@ -12,6 +12,7 @@ class TurnManager:
         exit = (len(shop.shown_characters) + len(shop.shown_items))
 
         while True:
+            print("Available gold: " + str(player.gold))
             print(shop)
             print(exit, "for Exit")
             print("Select a card to buy:")
@@ -46,17 +47,19 @@ class TurnManager:
             except:
                 print("Invalid Input!")
                 continue
-            if index < 0 or index >= len(player.hand):
+            if index < 0 or index > len(player.hand) + 1:
                 print("Invalid input, try number between 0 and", (len(player.hand) + 1))
                 continue
             elif index == len(player.hand):
                 self.shopping(player, shop)
             elif index == (len(player.hand) + 1):
+                player.end_turn()
                 print("ENDING TURN")
                 return
             else:
                 card: Card = player.hand.pop(index)
                 card.play(player, opponent)
+                player.played.append(card)
                 if card.type == CardType.Item:
                     player.item_discard_pile.cards.append(card)
                 else:
@@ -69,6 +72,7 @@ class TurnManager:
             index = int(index)
         except:
             print("ENDING TURN")
+            player.end_turn()
             return
         if index == 0:
             self.shopping(player, shop)
