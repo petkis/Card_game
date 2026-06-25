@@ -12,6 +12,9 @@ class DummyTM:
 class DummyPlayer:
     def __init__(self):
         self.hp = 10
+    
+    def shuffle_decks(self):
+        return
 
 
 def test_game_player_one_wins(monkeypatch):

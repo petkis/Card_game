@@ -39,7 +39,12 @@ class TurnManager:
                 i += 1
             print(f"{i}: shop")
             print("Select a card to play:")
-            index = int(input())
+            index = input()
+            try:
+                index = int(index)
+            except:
+                print("Invalid Input!")
+                continue
             if index < 0 or index > len(player.hand):
                 print("Invalid input, try number between 0 and", len(player.hand))
                 continue

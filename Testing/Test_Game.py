@@ -5,6 +5,9 @@ class DummyPlayer:
     def __init__(self, hp=10):
         self.hp = hp
 
+    def shuffle_decks(self):
+        return
+
 
 class PlayerOneWinsTurnManager:
     def play_turn(self, player, opponent, shop):

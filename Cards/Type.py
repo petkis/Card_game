@@ -9,3 +9,10 @@ class OptionType(Enum):
     Draw = auto()
     Money = auto()
     Heal = auto()
+
+class Guild(Enum):
+    TradeGuild = auto()
+    ThievesGuild = auto()
+    Soldiers = auto()
+    Peasants = auto()
+    Church = auto()

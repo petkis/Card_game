@@ -1,12 +1,15 @@
+from Cards.Type import Guild
+
 class Character:
-    def __init__(self, description, abilities, cost):
+    def __init__(self, description: str, abilities, cost: int, guild = None):
         self.description = description
         self.abilities = abilities
         self.cost = cost
+        self.guild: Guild | None = guild
 
     def apply(self, player, opponent):
         for ability in self.abilities:
-            ability(player, opponent)
+            ability.use_ability(player, opponent)
 
     def __str__(self):
         return(self.description)

@@ -6,6 +6,6 @@ class Ability:
     def __str__(self):
         return self.ability
 
-    def use_ability(self):
-        if self.condition:
-            return self.ability
+    def use_ability(self, player, opponent):
+        if self.condition(player, opponent):
+            self.ability(player, opponent)

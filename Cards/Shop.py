@@ -1,5 +1,4 @@
 from Cards.Starter import start_shop
-from Cards.Type import CardType
 from Cards.Cards import Card
 from Player.Player import Player
 
